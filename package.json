@@ -10,8 +10,10 @@
     "lint": "eslint --cache --format codeframe --ext mjs,jsx,js src test"
   },
   "dependencies": {
+    "mdbreact": "^4.25.4",
     "prop-types": "^15",
     "react": "^16",
+    "react-bootstrap": "^1.0.0-beta.17",
     "react-dom": "^16",
     "react-hot-loader": "^4"
   },

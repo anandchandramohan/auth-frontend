@@ -1,11 +1,12 @@
 import { hot } from 'react-hot-loader';
 import React from 'react';
 import './App.css';
+import Login from './components/login/Login';
 
-const message = 'Welcome to auth-frontend';
 const App = () => (
   <div className="App">
-    <h1>{message}</h1>
+    <Login />
+    <h1>Test</h1>
   </div>
 );
 

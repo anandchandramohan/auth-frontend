@@ -1,13 +1,14 @@
-import { hot } from 'react-hot-loader';
-import React from 'react';
+import * as React from "react";
+import { Wrapper } from './components/Styles';
+import Login from './containers/Login';
 import './App.css';
-import Login from './components/login/Login';
 
-const App = () => (
-  <div className="App">
-    <Login />
-    <h1>Test</h1>
-  </div>
-);
+function App() {
+  return (
+    <Wrapper>
+      <Login />
+    </Wrapper>
+  );
+}
 
-export default hot(module)(App);
+export default App;

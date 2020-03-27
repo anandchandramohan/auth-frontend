@@ -15,7 +15,10 @@
     "react": "^16",
     "react-bootstrap": "^1.0.0-beta.17",
     "react-dom": "^16",
-    "react-hot-loader": "^4"
+    "react-hot-loader": "^4",
+    "reactstrap": "^8.4.1",
+    "styled-components": "^5.0.1",
+    "validator": "^13.0.0"
   },
   "devDependencies": {
     "@neutrinojs/airbnb": "^9.1.0",

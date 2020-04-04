@@ -7,23 +7,47 @@ import useErrorHandler from '../utils/custom-hooks/ErrorHandler';
 /** Utils */
 import { apiRequest, validateLoginForm } from '../utils/Helper';
 import { Header } from '../components/Styles';
+import { socketAddress } from '../utils/Consts';
+/** Context */
+import { authContext } from "../contexts/AuthContext";
 
 function Login() {
     const [userEmail, setUserEmail] = React.useState("");
     const [userPassword, setUserPassword] = React.useState("");
     const [loading, setLoading] = React.useState(false);
     const { error, showError } = useErrorHandler(null); 
+    const auth = React.useContext(authContext);
 
     const authHandler = async () => {
         try {
             setLoading(true);
-            const userData = await apiRequest(
-                "https://jsonplaceholder.typicode.com/users",
-                "post",
-                { email: userEmail, password: userPassword }
-            );
-            const { id, email } = userData;
+            const url = socketAddress + 'login';
+            const body = {
+                userName : userEmail,
+                password : userPassword
+            }
+            alert('Calling POST method');
+            apiRequest(url,'post', body).then( response => {
+                alert("First promise");
+                return response.json();
+            }).then(data => {
+                alert("Second promise");
+                console.log(data);
+                const {item, meta} = data;
+                const authInfo = {
+                    'firstName' : item.firstName,
+                    'lastName' : item.lastName,
+                    'primaryEmail' : item.primaryEmail,
+                    'userName' : item.userName,
+                    'token' : meta.token
+                };
+                console.log(authInfo);
+                auth.setAuthStatus(authInfo);
+                console.log(authInfo);
+                setLoading(false); 
+            });
         } catch (err) {
+            alert("Error");
             setLoading(false);
             showError(err.message);
         }
@@ -61,4 +85,3 @@ function Login() {
 }
 
 export default Login;
-

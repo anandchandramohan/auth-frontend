@@ -1,7 +1,9 @@
-import * as validator from "validator";
+import validator from "validator";
+import { DEFAULT_USER_AUTH } from './Consts';
 
-export const apiRequest = async (url, method, bodyParams) => {
-  const response = await fetch(url, {
+export const apiRequest =  async (url, method, bodyParams) => {
+  console.log("Calling rest api");
+  return await fetch(url, {
      method : method,
      headers: {
         Accept: 'application/json',
@@ -9,7 +11,6 @@ export const apiRequest = async (url, method, bodyParams) => {
       },
       body: bodyParams ? JSON.stringify(bodyParams) : undefined
   });
-  return response.json;  
 };
 
 export const validateLoginForm = (email, password, setError) => {
@@ -24,4 +25,13 @@ export const validateLoginForm = (email, password, setError) => {
       return false;
   }
   return true;
+};
+
+export const getStoredUserAuth = () => {
+  const auth = window.localStorage.getItem("UserAuth");
+  if (auth) {
+      return JSON.parse(auth);
+
+  }
+  return DEFAULT_USER_AUTH;
 };
